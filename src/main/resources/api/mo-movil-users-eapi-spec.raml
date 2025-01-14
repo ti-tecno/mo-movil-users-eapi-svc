@@ -1,0 +1,14 @@
+#%RAML 1.0
+title: Movil API Services for Medical Offices
+version: v1
+
+/login:
+  post:
+    description: Login method for medical office app
+    body:
+      application/json:
+        type: !include request/post-login.raml
+    responses:
+        201:
+          body:
+            application/json:

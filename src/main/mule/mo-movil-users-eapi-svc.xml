@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd">
+    <apikit:config name="Router" api="mo-movil-users-eapi-spec.raml" outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" />
+    <http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7ef1f961-f5b6-47d3-9ae3-d3301679f900">
+        <http:listener-connection host="0.0.0.0" port="8081" />
+    </http:listener-config>
+    <flow name="mo-movil-users-eapi-svcFlow" doc:id="915186f0-c04d-4f58-8c1b-1dc178be52dd">
+        <http:listener doc:name="Listener" doc:id="094200e0-2ded-43d8-bb29-9f309d9c8709" config-ref="HTTP_Listener_config" path="/*" />
+        <apikit:router doc:name="APIkit Router" doc:id="1c47067f-db3c-4acd-9dee-2816d0f28cca" config-ref="Router" />
+    </flow>
+    <flow name="post:\login:application\json:Router">
+        <logger level="INFO" message="post:\login:application\json:Router" />
+    </flow>
+</mule>
